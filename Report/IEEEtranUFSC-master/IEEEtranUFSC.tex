@@ -1,0 +1,114 @@
+%%------------------------------------------------------
+% 
+%% UNIVERSIDADE FEDERAL DE SANTA CATARINA - UFSC
+%
+%% Prof.: Wyllian B. da Silva
+%%
+
+\documentclass[journal]{IEEEtran}
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{SNAKE COLORS}
+\author{John Thomas Coelho, Patric Lara Ferrari}
+
+\begin{document}
+
+\maketitle
+
+%%----------------- Título
+\title                                                {Snake Colors}
+
+\newcommand{\emailautor}                              {johnthomas.style@hotmail.com}
+
+\newcommand{\siglaRevista}                            {UFSC}
+
+\newcommand{\Revista}                                 {Universidade Federal de Santa Catarina (UFSC)}
+
+\begin{abstract}
+%% Abstract
+\IEEEtitleabstractindextext{
+
+  {\selectlanguage{brazil}
+    \begin{abstract}
+    
+    \end{abstract}
+    %%----------------- Keywords
+    \renewcommand\IEEEkeywordsname{Palavras-chave} %% Palavras-chave ao invés de 'Index Terms'
+    \begin{IEEEkeywords}
+    Baseado no classico jogo de celular Snake (Jogo da cobrinha), decidimos refazer o jogo no Linux/Terminal.
+    \end{IEEEkeywords}
+  }
+%------------------------------------------------------
+% Section
+\section{Introdução}
+Baseado no classico jogo de celular Snake (Jogo da cobrinha), decidimos refazer o jogo no Linux/Terminal.
+A lógica do jogo consiste em cada vez que a cobrinha se alimenta ela cresce de tamannho acrescentendo 1 a sua pontuação e mudando de cor e velocidade de acordo com mais pontos pego. 
+Foram criados 3 níveis. No primeiro (level 1) é apenas o mapa normal com a pontuação que vai até 10.
+No level 2 obstaculos são adicionaos a cada pontuação feita, indo até 20 pontos.
+Nível 3, a cada 5 movimentos o ponto ira mudar de lugar, somando isso ao obstaculo ja istalados, o nivel 3 apresenta grande dificuldade.
+%------------------------------------------------------
+
+%%subsection
+\subsection{Bibliotecas}
+<termios.h> 
+<unstd.h>
+<fcntl.h>
+São utilizadas por conta da função int kbhit(void). É uma função inexistente no Linux, mas era necessario para fazer o jogo rodar.
+Sua função é ler o teclado a todo tempo e enquanto nenhuma tecla é pressionada ela retorna 0 par ao computador, e quanto é pressionada retorna 1.
+<n.curses.h>
+Manipulação do terminal.
+Para fazer o download da Biblioteca ncurses:
+sudo apt-get install libncurses5-dev libncursesw5-dev.
+<time.h>
+Manipula o tempo.
+
+%
+%-----------------------------------------------------
+%
+\subsection{Define}
+Na parte de definição foi utilizado cordenadas, são elas: Horizontal, vertical, cima, baixo, esquerda e direita. São os sentidos que a snake toma.
+Para movimentar a snake no terminal são usados as teclas W,A,S,D.
+
+O int global_move=0, é um contador que conta quantos movimentos foi feito. É usado no terceiro nível para contar os 5 movimentos.
+
+Typedif Struct Snake
+Cordenadas em X e Y para calda e cabeça mais a velocidade.
+%
+%-----------------------------------------------------
+%
+\subsection{Main código principal}
+Srand (time(NULL)) cria a semente e o tempo faz com que saia em um lugar aleatório.
+em seguida temos uma função ``do'', ``while''. Entrada e saida do jogo.
+Dentro do ``do'' é imposto algumas declarações como o proprio snake, snake1, velocidade, posição e comida.
+O snake_init é um procedimento que define as cordenadas da calda em X e Y e as cordenadas da cabeça também em X e Y. (codenada da calda mais o tamanho menos um.
+
+Food_init criação aleatória para a comida dentro dos limites definido no terminal.
+Void snake_place procedimento que define as posições da snake.
+Set_borders printa e cria os limites da tela. Criação dada através de laços em X e Y criando as paredes
+Horizontal e vertical.
+%
+%-----------------------------------------------------
+%
+\subsection{Movimento}
+Move_head (snake *snake1, snake_pos *pos1)
+Controle pelos direcionais. Quando é pressionado A, S, W, D entra no laço que soma ou subtrai as cordenadas.
+O ``if'' a baixo não pega nenhum ponto e começa o procedimento com o move_tail, onde a calda passa ele printa um espaço  em branco.
+No ``for'' atualiza a posição do corpo da snake..
+
+else quando a snake se alimenta, aumenta o tamanho e a velcidade e acrescenta 1 a sua pontuação.
+
+Obstaculo_init cria um obstaculo aleatório nos limetes do jogo.
+obstaculo_print, printa os obstaculos (8).
+%
+%-----------------------------------------------------
+\subsection{Game Over}
+Colidindo com a parede, corpo ou obstaculos (8), é disparado um som de fim de jogo e é dado a opção se o usuario quer ternornar ao jogo.
+%%------------------------------------------------------
+%% Section
+\section{Conclusão}
+O objetivo final para a conclusão na materia de progração 1 ministrada pelo professor Wyllian B. da Silva, foi a criação de um jogo usando os recursos do Linux, e da linguagem c, o executando no terminal. Portando dessas ferramentas, aperfeiçoamos nossa capacidade no desenvolvimento de algoritmos alem da pratica na utilização de matrizes, ponteiros e vetores, bem como na combinação de procedimentos e funções.
+
+\end{document}
